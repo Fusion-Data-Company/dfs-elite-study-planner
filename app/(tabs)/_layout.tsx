@@ -33,35 +33,60 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="house.fill" color={color} />,
         }}
       />
       <Tabs.Screen
+        name="flashcards"
+        options={{
+          title: "iFlash",
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="rectangle.stack.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="lessons"
+        options={{
+          title: "Lessons",
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="book.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="quiz"
+        options={{
+          title: "Quiz",
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="checkmark.circle.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="agents"
+        options={{
+          title: "AI Tutors",
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="brain.fill" color={color} />,
+        }}
+      />
+      {/* Hidden tabs - keep for routing but hide from tab bar */}
+      <Tabs.Screen
         name="goals"
         options={{
-          title: "Goals",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="target" color={color} />,
+          href: null, // Hide from tab bar
         }}
       />
       <Tabs.Screen
         name="tasks"
         options={{
-          title: "Tasks",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="checklist" color={color} />,
+          href: null, // Hide from tab bar
         }}
       />
       <Tabs.Screen
         name="guides"
         options={{
-          title: "Guides",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="book.fill" color={color} />,
+          href: null, // Hide from tab bar
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gearshape.fill" color={color} />,
+          href: null, // Hide from tab bar
         }}
       />
     </Tabs>

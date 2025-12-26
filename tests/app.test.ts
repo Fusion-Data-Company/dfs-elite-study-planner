@@ -120,3 +120,103 @@ describe("DFS Elite Study Planner App", () => {
     });
   });
 });
+
+
+describe("File Structure", () => {
+  const fs = require("fs");
+  const path = require("path");
+  const projectRoot = path.resolve(__dirname, "..");
+
+  describe("Tab Screens", () => {
+    const tabScreens = [
+      "index.tsx",
+      "flashcards.tsx",
+      "lessons.tsx",
+      "quiz.tsx",
+      "agents.tsx",
+    ];
+
+    tabScreens.forEach((screen) => {
+      it(`should have ${screen} tab screen`, () => {
+        const screenPath = path.join(projectRoot, "app/(tabs)", screen);
+        expect(fs.existsSync(screenPath)).toBe(true);
+      });
+    });
+  });
+
+  describe("Auth Screens", () => {
+    it("should have sign-in screen", () => {
+      const signInPath = path.join(projectRoot, "app/(auth)/sign-in.tsx");
+      expect(fs.existsSync(signInPath)).toBe(true);
+    });
+
+    it("should have sign-up screen", () => {
+      const signUpPath = path.join(projectRoot, "app/(auth)/sign-up.tsx");
+      expect(fs.existsSync(signUpPath)).toBe(true);
+    });
+  });
+
+  describe("Dynamic Routes", () => {
+    it("should have lesson detail route", () => {
+      const lessonPath = path.join(projectRoot, "app/lesson/[slug].tsx");
+      expect(fs.existsSync(lessonPath)).toBe(true);
+    });
+
+    it("should have exam route", () => {
+      const examPath = path.join(projectRoot, "app/exam/[bankId].tsx");
+      expect(fs.existsSync(examPath)).toBe(true);
+    });
+  });
+
+  describe("Components", () => {
+    const components = [
+      "FlashCard.tsx",
+      "MCQCard.tsx",
+      "TermCard.tsx",
+      "AgentChat.tsx",
+    ];
+
+    components.forEach((component) => {
+      it(`should have ${component} component`, () => {
+        const componentPath = path.join(projectRoot, "components", component);
+        expect(fs.existsSync(componentPath)).toBe(true);
+      });
+    });
+  });
+
+  describe("Hooks", () => {
+    const hooks = [
+      "useProgress.ts",
+      "useFlashcards.ts",
+      "useLessons.ts",
+      "useAgentChat.ts",
+      "useExams.ts",
+    ];
+
+    hooks.forEach((hook) => {
+      it(`should have ${hook} hook`, () => {
+        const hookPath = path.join(projectRoot, "hooks", hook);
+        expect(fs.existsSync(hookPath)).toBe(true);
+      });
+    });
+  });
+
+  describe("API Client", () => {
+    it("should have API client", () => {
+      const apiPath = path.join(projectRoot, "lib/api.ts");
+      expect(fs.existsSync(apiPath)).toBe(true);
+    });
+  });
+
+  describe("Assets", () => {
+    it("should have app icon", () => {
+      const iconPath = path.join(projectRoot, "assets/images/icon.png");
+      expect(fs.existsSync(iconPath)).toBe(true);
+    });
+
+    it("should have splash icon", () => {
+      const splashPath = path.join(projectRoot, "assets/images/splash-icon.png");
+      expect(fs.existsSync(splashPath)).toBe(true);
+    });
+  });
+});
