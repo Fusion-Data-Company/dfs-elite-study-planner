@@ -1,29 +1,67 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { SymbolWeight, SymbolViewProps } from "expo-symbols";
+import { SymbolWeight } from "expo-symbols";
 import { ComponentProps } from "react";
 import { OpaqueColorValue, type StyleProp, type TextStyle } from "react-native";
 
-type IconMapping = Record<SymbolViewProps["name"], ComponentProps<typeof MaterialIcons>["name"]>;
+type MaterialIconName = ComponentProps<typeof MaterialIcons>["name"];
+
+/**
+ * SF Symbols to Material Icons mappings for DFS Elite Study Planner
+ */
+const MAPPING: Record<string, MaterialIconName> = {
+  // Tab bar icons
+  "house.fill": "home",
+  "target": "track-changes",
+  "checklist": "checklist",
+  "book.fill": "menu-book",
+  "gearshape.fill": "settings",
+  // Navigation icons
+  "chevron.right": "chevron-right",
+  "chevron.left": "chevron-left",
+  "chevron.down": "expand-more",
+  "chevron.up": "expand-less",
+  // Action icons
+  "plus": "add",
+  "plus.circle.fill": "add-circle",
+  "checkmark": "check",
+  "checkmark.circle.fill": "check-circle",
+  "xmark": "close",
+  "xmark.circle.fill": "cancel",
+  // Feature icons
+  "flame.fill": "local-fire-department",
+  "trophy.fill": "emoji-events",
+  "star.fill": "star",
+  "clock.fill": "schedule",
+  "calendar": "calendar-today",
+  "bell.fill": "notifications",
+  "person.fill": "person",
+  "brain": "psychology",
+  "lightbulb.fill": "lightbulb",
+  "graduationcap.fill": "school",
+  "chart.bar.fill": "bar-chart",
+  "arrow.up.right": "trending-up",
+  "play.fill": "play-arrow",
+  "pause.fill": "pause",
+  "arrow.clockwise": "refresh",
+  // Content icons
+  "doc.text.fill": "description",
+  "folder.fill": "folder",
+  "bookmark.fill": "bookmark",
+  "heart.fill": "favorite",
+  "share": "share",
+  "ellipsis": "more-horiz",
+  // Status icons
+  "exclamationmark.triangle.fill": "warning",
+  "info.circle.fill": "info",
+  "questionmark.circle.fill": "help",
+};
+
 type IconSymbolName = keyof typeof MAPPING;
 
 /**
- * Add your SF Symbols to Material Icons mappings here.
- * - see Material Icons in the [Icons Directory](https://icons.expo.fyi).
- * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
- */
-const MAPPING = {
-  "house.fill": "home",
-  "paperplane.fill": "send",
-  "chevron.left.forwardslash.chevron.right": "code",
-  "chevron.right": "chevron-right",
-} as IconMapping;
-
-/**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
- * This ensures a consistent look across platforms, and optimal resource usage.
- * Icon `name`s are based on SF Symbols and require manual mapping to Material Icons.
  */
 export function IconSymbol({
   name,
@@ -37,5 +75,6 @@ export function IconSymbol({
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  const iconName = MAPPING[name] || "help";
+  return <MaterialIcons color={color} size={size} name={iconName} style={style} />;
 }
