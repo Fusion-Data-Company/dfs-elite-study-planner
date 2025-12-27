@@ -33,7 +33,7 @@ const MAPPING: Record<string, ComponentProps<typeof MaterialIcons>["name"]> = {
   "magnifyingglass": "search",
   "person.fill": "person",
   "person.circle.fill": "account-circle",
-  "bell.fill": "notifications",
+  "bell.fill": "notifications-active",
   "star.fill": "star",
   "heart.fill": "favorite",
   "trash.fill": "delete",
