@@ -12,6 +12,9 @@
       ],
       "@shared/*": [
         "./shared/*"
+      ],
+      "@clerk/clerk-expo": [
+        "./lib/mock-clerk.tsx"
       ]
     }
   },

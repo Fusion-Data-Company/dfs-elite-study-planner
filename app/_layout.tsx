@@ -17,7 +17,9 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 import type { EdgeInsets, Metrics, Rect } from "react-native-safe-area-context";
-import { ClerkProvider, ClerkLoaded, useAuth } from "@clerk/clerk-expo";
+// import { ClerkProvider, ClerkLoaded, useAuth } from "@clerk/clerk-expo";
+// MOCK CLERK FOR DEPLOYMENT PREVIEW
+import { ClerkProvider, ClerkLoaded, useAuth } from "@/lib/mock-clerk";
 import { tokenCache, CLERK_PUBLISHABLE_KEY } from "@/lib/clerk";
 
 import { trpc, createTRPCClient } from "@/lib/trpc";
