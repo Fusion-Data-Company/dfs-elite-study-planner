@@ -71,6 +71,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={26} name="bell.fill" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <IconSymbol size={26} name="person.circle.fill" color={color} />,
+        }}
+      />
       {/* Hidden tabs - keep for routing but hide from tab bar */}
       <Tabs.Screen
         name="goals"
