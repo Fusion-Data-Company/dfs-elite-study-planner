@@ -7,6 +7,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import { Platform } from "react-native";
 import "@/lib/_core/nativewind-pressable";
+import { View, ActivityIndicator, Text } from "react-native";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/lib/theme-provider";
 import {
   SafeAreaFrameContext,
@@ -111,23 +113,47 @@ export default function RootLayout() {
     };
   }, [initialInsets, initialFrame]);
 
+  const { isLoaded } = useAuth();
+
   const content = (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY}
-        tokenCache={tokenCache}
-      >
-        <ClerkLoaded>
-          <trpc.Provider client={trpcClient} queryClient={queryClient}>
-            <QueryClientProvider client={queryClient}>
-              <AuthNavigator />
-              <StatusBar style="auto" />
-            </QueryClientProvider>
-          </trpc.Provider>
-        </ClerkLoaded>
-      </ClerkProvider>
+      <ErrorBoundary>
+        <ClerkProvider
+          publishableKey={CLERK_PUBLISHABLE_KEY}
+          tokenCache={tokenCache}
+        >
+          {/* Manually handle loading state to avoid white screen if Clerk fails */}
+          <AuthLoader>
+            <trpc.Provider client={trpcClient} queryClient={queryClient}>
+              <QueryClientProvider client={queryClient}>
+                <AuthNavigator />
+                <StatusBar style="auto" />
+              </QueryClientProvider>
+            </trpc.Provider>
+          </AuthLoader>
+        </ClerkProvider>
+      </ErrorBoundary>
     </GestureHandlerRootView>
   );
+
+  // Helper component to handle Clerk loading state
+  function AuthLoader({ children }: { children: React.ReactNode }) {
+    const { isLoaded } = useAuth();
+
+    if (!isLoaded) {
+      return (
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator size="large" color="#0ea5e9" />
+          <Text style={{ marginTop: 20, color: "#666" }}>Loading Authentication...</Text>
+          <Text style={{ marginTop: 10, fontSize: 12, color: "#999" }}>
+            (If this persists, check Clerk API Keys)
+          </Text>
+        </View>
+      );
+    }
+
+    return <>{children}</>;
+  }
 
   const shouldOverrideSafeArea = Platform.OS === "web";
 

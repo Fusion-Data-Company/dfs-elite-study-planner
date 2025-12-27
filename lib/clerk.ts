@@ -3,11 +3,13 @@
  * Uses the same Clerk instance as the web platform
  */
 
+import { Platform } from "react-native";
 import * as SecureStore from "expo-secure-store";
 
 // Token cache for Clerk - stores auth tokens securely
 export const tokenCache = {
   async getToken(key: string) {
+    if (Platform.OS === "web") return null;
     try {
       return SecureStore.getItemAsync(key);
     } catch (err) {
@@ -15,6 +17,7 @@ export const tokenCache = {
     }
   },
   async saveToken(key: string, value: string) {
+    if (Platform.OS === "web") return;
     try {
       return SecureStore.setItemAsync(key, value);
     } catch (err) {
@@ -22,6 +25,7 @@ export const tokenCache = {
     }
   },
   async clearToken(key: string) {
+    if (Platform.OS === "web") return;
     try {
       return SecureStore.deleteItemAsync(key);
     } catch (err) {
