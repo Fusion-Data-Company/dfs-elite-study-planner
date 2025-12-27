@@ -106,3 +106,9 @@
 - [x] Add settings/preferences
 - [x] Add sign out functionality
 
+
+
+## Database Connection
+- [x] Configure Neon database connection string
+- [x] Test database connectivity
+- [x] Verify mobile app can fetch data from shared database

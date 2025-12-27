@@ -6,6 +6,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const API_BASE_URL = "https://dfselitelearningplatform.vercel.app";
+const DATABASE_URL = process.env.NEON_DATABASE_URL || "";
 
 interface ApiOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE";
@@ -222,6 +223,7 @@ class ApiClient {
 }
 
 export const api = new ApiClient(API_BASE_URL);
+export { DATABASE_URL };
 
 // Storage helpers for offline support
 export const storage = {
